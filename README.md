@@ -32,6 +32,7 @@ SNSで購入したもの(戦利品)を報告する人が多く、その情報を
 のちに追加
 
 ## チャレンジ要素一覧
+https://docs.google.com/spreadsheets/d/12NQLOEWEji_CsKzDi2Ru29oPXycbCvRM-nGVAoGTigE/edit?usp=sharing
 
 
 ## 開発環境
