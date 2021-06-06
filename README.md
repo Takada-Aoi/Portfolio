@@ -1,4 +1,4 @@
-# Enjoy OTA-KATU!
+# Enjoy OTA-KATSU!
 
 ## サイト概要
 オタ活(オタク活動)報告ブログサイト  
