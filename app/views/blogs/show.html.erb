@@ -1,0 +1,26 @@
+<table>
+    <tr>
+        <td><%= @blog.user.nickname %></td>
+        <td><%= @blog.created_at.strftime('%Y/%m/%d') %></td>
+    </tr>
+    <tr>
+        <td>
+            <%= @blog.title %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <%= @blog.body %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <%= attachment_image_tag @blog, :image , :fill,100,100,format:'jpeg' %>
+        </td>
+    </tr>
+</table>
+<% if current_user == @blog.user %>
+<%= link_to "編集", edit_blog_path(@blog.id) %>
+<%= link_to "削除", blog_path(@blog.id),method: :delete,data:{confirm:"本当に削除しますか？"} %>
+<% end %>
+<%= link_to "一覧", blogs_path %>

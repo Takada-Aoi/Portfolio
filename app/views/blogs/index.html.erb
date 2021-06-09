@@ -1,7 +1,10 @@
-<h1>マイページ</h1>
+<h1>投稿一覧</h1>
+
+
 <table>
     <% @blogs.each do |blog| %>
     <tr>
+        <td><%= blog.user.nickname %></td>
         <td><%= blog.created_at.strftime('%Y/%m/%d') %></td>
     </tr>
     <tr>
@@ -11,6 +14,17 @@
             <% end %>
         </td>
     </tr>
+    <tr>
+        <td>
+            <%= blog.body %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <%= attachment_image_tag blog, :image , :fill,100,100,format:'jpeg' %>
+        </td>
+    </tr>
     <% end %>
 </table>
+
 <button class ="fixed_button" ><%= link_to "新規投稿",new_blog_path %></button>
