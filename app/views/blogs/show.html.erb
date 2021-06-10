@@ -18,15 +18,31 @@
             <%= attachment_image_tag @blog, :image , :fill,100,100,format:'jpeg' %>
         </td>
     </tr>
+    <!--いいね-->
+    <tr>
+        <% if @blog.favorited_by?(current_user) %>
+        <td>
+            <%= link_to blog_favorites_path(@blog),method: :delete do %>
+            ♥<%= @blog.favorites.count %> いいね
+            <% end %>
+        </td>
+        <% else %>
+         <td>
+            <%= link_to blog_favorites_path(@blog),method: :post do %>
+            ♡<%= @blog.favorites.count %> いいね
+            <% end %>
+        </td>
+        <% end %>
+    </tr>
 </table>
 <% if current_user == @blog.user %>
 <%= link_to "編集", edit_blog_path(@blog.id) %>
 <%= link_to "削除", blog_path(@blog.id),method: :delete,data:{confirm:"本当に削除しますか？"} %>
 <% end %>
 <%= link_to "一覧", blogs_path %>
-
+<!--コメント一覧-->
 <div>
-    <p><%= @blog.post_comments.count%></p>
+    <p>コメント数:<%= @blog.post_comments.count%></p>
     <% @blog.post_comments.each do |post_comment| %>
      <%= post_comment.user.nickname %>
      <%= post_comment.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %><br>
@@ -38,6 +54,7 @@
       <% end %>
     <% end %>
 </div>
+<!--コメント投稿-->
 <div>
     <%= form_with(model:[@blog,@post_comment],local: true) do |f| %>
      <%= f.text_area :comment, rows:'5',placeholder:"コメント欄" %>
