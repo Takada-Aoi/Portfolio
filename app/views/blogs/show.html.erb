@@ -1,7 +1,7 @@
 <table>
     <tr>
         <td><%= @blog.user.nickname %></td>
-        <td><%= @blog.created_at.strftime('%Y/%m/%d') %></td>
+        <td><%= @blog.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %></td>
     </tr>
     <tr>
         <td>
@@ -24,3 +24,23 @@
 <%= link_to "削除", blog_path(@blog.id),method: :delete,data:{confirm:"本当に削除しますか？"} %>
 <% end %>
 <%= link_to "一覧", blogs_path %>
+
+<div>
+    <p><%= @blog.post_comments.count%></p>
+    <% @blog.post_comments.each do |post_comment| %>
+     <%= post_comment.user.nickname %>
+     <%= post_comment.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %><br>
+     <%= post_comment.comment %>
+      <% if post_comment.user == current_user %>
+      <div>
+          <%= link_to "削除",blog_post_comment_path(post_comment.blog),method: :delete,data:{confirm:"本当に削除しますか？"} %>
+      </div>
+      <% end %>
+    <% end %>
+</div>
+<div>
+    <%= form_with(model:[@blog,@post_comment],local: true) do |f| %>
+     <%= f.text_area :comment, rows:'5',placeholder:"コメント欄" %>
+     <%= f.submit "送信する" %>
+    <% end %> 
+</div>

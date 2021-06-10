@@ -8,4 +8,5 @@ class User < ApplicationRecord
   validates :nickname,presence: true, length: { in: 2..20 }
 
   has_many :blogs,dependent: :destroy
+  has_many :post_comments,dependent: :destroy
 end

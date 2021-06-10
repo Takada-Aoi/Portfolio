@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @blogs = @user.blogs
   end
-  
+
   def index
     @users = User.all
   end
