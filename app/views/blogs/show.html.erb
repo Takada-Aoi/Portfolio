@@ -34,7 +34,7 @@
             <% end %>
         </td>
         <% end %>
-       <% end %>    
+       <% end %>
     </tr>
 </table>
 <% if current_user == @blog.user %>
@@ -58,8 +58,10 @@
 </div>
 <!--コメント投稿-->
 <div>
+   <% if current_user == @blog.user.followers && current_user == @blog.user.followings %>
     <%= form_with(model:[@blog,@post_comment],local: true) do |f| %>
      <%= f.text_area :comment, rows:'5',placeholder:"コメント欄" %>
      <%= f.submit "送信する" %>
-    <% end %> 
+    <% end %>
+   <% end %>
 </div>

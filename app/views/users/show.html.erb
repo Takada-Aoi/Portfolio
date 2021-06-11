@@ -1,4 +1,5 @@
-<h1>マイページ</h1>
+<%= render 'users/info',user: @user %>
+
 <table>
     <tr>
         <th>投稿一覧</th>
@@ -16,6 +17,8 @@
     </tr>
     <% end %>
 </table>
+
+<% if current_user == @user %>
 <table>
     <tr>
         <th>いいねした投稿</th>
@@ -37,3 +40,4 @@
     <% end %>
 </table>
 <button class ="fixed_button" ><%= link_to "新規投稿",new_blog_path %></button>
+<% end %>
