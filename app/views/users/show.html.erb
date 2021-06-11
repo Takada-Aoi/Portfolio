@@ -1,5 +1,8 @@
 <h1>マイページ</h1>
 <table>
+    <tr>
+        <th>投稿一覧</th>
+    </tr>
     <% @blogs.each do |blog| %>
     <tr>
         <td><%= blog.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %></td>
@@ -9,6 +12,26 @@
             <%= link_to blog_path(blog.id) do %>
             <%= blog.title %>
             <% end %>
+        </td>
+    </tr>
+    <% end %>
+</table>
+<table>
+    <tr>
+        <th>いいねした投稿</th>
+    </tr>
+    <% @favorite_blogs.each do |blog| %>
+    <tr>
+        <td><%= blog.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %></td>
+    </tr>
+    <tr>
+        <td>
+            <%= link_to blog_path(blog.id) do %>
+            <%= blog.title %>
+            <% end %>
+        </td>
+        <td>
+            <%= blog.body %>
         </td>
     </tr>
     <% end %>
