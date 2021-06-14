@@ -1,3 +1,4 @@
+<%#= render 'blogs/error',blog: @post_comment %>
 <table>
     <tr>
         <td><%= @blog.user.nickname %></td>
@@ -51,17 +52,18 @@
      <%= post_comment.comment %>
       <% if post_comment.user == current_user %>
       <div>
-          <%= link_to "削除",blog_post_comment_path(post_comment.blog),method: :delete,data:{confirm:"本当に削除しますか？"} %>
+          <%= link_to "削除",blog_post_comment_path(post_comment.blog,post_comment),method: :delete,data:{confirm:"本当に削除しますか？"} %>
       </div>
       <% end %>
     <% end %>
 </div>
+
 <!--コメント投稿-->
 <div>
-   <% if current_user == @blog.user.followers && current_user == @blog.user.followings %>
+   <%# if current_user == @blog.user.followers && current_user == @blog.user.followings %>
     <%= form_with(model:[@blog,@post_comment],local: true) do |f| %>
      <%= f.text_area :comment, rows:'5',placeholder:"コメント欄" %>
      <%= f.submit "送信する" %>
     <% end %>
-   <% end %>
+   <%# end %>
 </div>

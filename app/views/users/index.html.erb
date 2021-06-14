@@ -11,6 +11,9 @@
      <% user.nickname %>
      <% end %>
      </td>
+     <td>
+      <%= attachment_image_tag user, :profile_image , :fill,100,100,format:'jpeg',fallback: "no_image_logo.jpg",size:'40x40' %>
+     </td>
      <!--フォロー-->
      <td>
       <% if user_signed_in? %>

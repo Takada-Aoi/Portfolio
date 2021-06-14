@@ -14,23 +14,23 @@ class BlogsController < ApplicationController
          render :new
         end
     end
-    
+
     def index
         @blogs = Blog.all
     end
-    
+
     def show
         @blog = Blog.find(params[:id])
         @post_comment = PostComment.new
     end
-    
+
     def edit
         @blog = Blog.find(params[:id])
         unless @blog.user == current_user
             redirect_to blog_path(@blog.id)
         end
     end
-    
+
     def update
         @blog = Blog.find(params[:id])
         if @blog.update(blog_params)
@@ -39,12 +39,12 @@ class BlogsController < ApplicationController
          render :edit
         end
     end
-    
+
     def destroy
         @blog = Blog.find(params[:id])
         @blog.destroy
         redirect_to user_path(@blog.user_id)
-    end    
+    end
 
     private
 

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to:'homes#top'
   
-  resources :users,only: [:show,:index] do
+  resources :users,only: [:show,:index,:edit,:update] do
     resource :relationships, only: [:create,:destroy]
     get :follows, on: :member #ユーザーidを含むURL
     get :followers, on: :member #ユーザーidを含むURL

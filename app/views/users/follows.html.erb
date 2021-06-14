@@ -12,7 +12,7 @@
     <% if @users.presence %>
     <% @users.each do |user| %>
       <tr>
-        <td><%#= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no-image-icon.jpg") %></td>
+        <td><%= attachment_image_tag user, :profile_image , :fill,100,100,format:'jpeg',fallback: "no_image_logo.jpg",size:'40x40' %></td>
         <td><%= user.nickname %></td>
         <td>
           フォロワー数：<%= user.followers.count %>

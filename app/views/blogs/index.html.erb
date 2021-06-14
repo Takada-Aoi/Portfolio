@@ -14,7 +14,7 @@
            <%= link_to "フォロー済み", user_relationships_path(blog.user.id), method: :delete %><br>
           <% else %>
            <%= link_to "フォローする", user_relationships_path(blog.user.id),method: :post %>
-          <% end %> 
+          <% end %>
          <% end %>
         <% end %>
         </td>

@@ -2,14 +2,14 @@
  <table>
     <tr>
        <th>ユーザー名</th>
-       <th>ユーザープロフィール</th>
+       <th>プロフィール</th>
        <th>ユーザー画像</th>
     </tr>
     <tr>
      <td><%= user.nickname %></td>
-     <td><%#= user.profile %></td>
+     <td><%= user.profile %></td>
      <td>
-         <%#= attachment_image_tag user, :profile_image , :fill,100,100,format:'jpeg' %>
+         <%= attachment_image_tag user, :profile_image , :fill,100,100,format:'jpeg',fallback: "no_image_logo.jpg",size:'40x40' %>
      </td>
      <!--フォロー-->
      <td>
@@ -24,10 +24,19 @@
       <% end %>
      </td>
     </tr>
-    <tr>
+ </table>
+ <table>
+  <tr>
       <% if current_user == user %>
-       <%= link_to "フォロー",follows_user_path(user.id) %> :
-       <%= link_to "フォロワー",followers_user_path(user.id) %>
+       <td>
+        <%= link_to "フォロー",follows_user_path(user.id) %> :
+        <%= link_to "フォロワー",followers_user_path(user.id) %>
+       </td>
+  <tr>
+       <td>
+        <%= link_to "プロフィール編集",edit_user_path(user.id) %>
+       </td>
+  </tr>
       <% end %>
     </tr>
  </table>
