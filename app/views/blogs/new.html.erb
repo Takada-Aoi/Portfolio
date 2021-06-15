@@ -6,6 +6,8 @@
 <%= f.text_field:title %>
 <h4>本文</h4>
 <%= f.text_area:body %>
+<h4>カテゴリー</h4>
+<%= f.collection_select :category_id, Category.all, :id, :category_name, %>
  <%= f.submit'投稿する' %>
 <% end %>
 
