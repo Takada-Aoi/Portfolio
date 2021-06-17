@@ -1,5 +1,6 @@
 class BlogsController < ApplicationController
     before_action :authenticate_user!, {only: [:new, :edit, :update, :destroy]}
+    before_action :set_q, only: [:index, :search]
 
     def new
         @blog = Blog.new
@@ -46,9 +47,17 @@ class BlogsController < ApplicationController
         redirect_to user_path(@blog.user_id)
     end
 
+    def search
+        @results = @q.result
+    end
+
     private
 
     def blog_params
         params.require(:blog).permit(:title,:body,:image,:category_id)
+    end
+
+    def set_q
+        @q = Blog.ransack(params[:q])
     end
 end

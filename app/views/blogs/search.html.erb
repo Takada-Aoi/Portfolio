@@ -1,14 +1,5 @@
-<h1>投稿一覧</h1>
-<div>
-<%= search_form_for(@q, url:search_blogs_path,local: true) do |f| %>
-  <%= f.select :category_id_eq, options_from_collection_for_select(Category.all, :id, :category_name , 1) %>
-  <%= f.submit "検索" %>
-<% end %>
-</div>
-
-
 <table>
-    <% @blogs.each do |blog| %>
+    <% @results.each do |blog| %>
     <tr>
         <td><%= blog.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %></td>
         <td><%= blog.user.nickname %></td>
@@ -66,5 +57,3 @@
     </tr>
     <% end %>
 </table>
-
-<button class ="fixed_button" ><%= link_to "新規投稿",new_blog_path %></button>
