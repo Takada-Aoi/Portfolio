@@ -11,7 +11,7 @@
     </tr>
     <tr>
         <td>
-            カテゴリー： <%#= @blog.category.category_name %>
+            カテゴリー： <%= @blog.category.category_name %>
         </td>
     </tr>
     <tr>
@@ -28,7 +28,7 @@
         <!--いいね-->
     <%= render 'favorites/favorite',blog: @blog %>
     </tr>
-    
+
 </table>
 <% if current_user == @blog.user %>
 <%= link_to "編集", edit_blog_path(@blog.id) %>
@@ -36,23 +36,16 @@
 <% end %>
 <%= link_to "一覧", blogs_path %>
 <!--コメント一覧-->
-<div>
+<div class = "comments-count">
     <p>コメント数:<%= @blog.post_comments.count%></p>
-    <% @blog.post_comments.each do |post_comment| %>
-     <%= post_comment.user.nickname %>
-     <%= post_comment.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %><br>
-     <%= post_comment.comment %>
-      <% if post_comment.user == current_user %>
-      <div>
-          <%= link_to "削除",blog_post_comment_path(post_comment.blog,post_comment),method: :delete,data:{confirm:"本当に削除しますか？"} %>
-      </div>
-      <% end %>
-    <% end %>
+</div>
+<div class = "blog_comments">
+   <%= render 'post_comments/comment', blog: @blog %>
 </div>
 <!--コメント投稿-->
 <div>
     <% if current_user.followed_by?(@blog.user) && @blog.user.followed_by?(current_user) %>
-     <%= form_with(model:[@blog,@post_comment],local: true) do |f| %>
+     <%= form_with(model:[@blog,@post_comment]) do |f| %>
       <%= f.text_area :comment, rows:'5',placeholder:"コメント欄" %>
       <%= f.submit "送信する" %>
      <% end %>

@@ -1,0 +1,20 @@
+   <table>
+     <% blog.post_comments.each do |post_comment| %>
+    <tr>
+      <td>
+         <%= post_comment.user.nickname %>
+      </td>
+      <td>
+        <%= post_comment.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %>
+      </td>
+      <td>
+        <%= post_comment.comment %>
+      </td>
+     <% if post_comment.user == current_user %>
+      <td>
+          <%= link_to "削除",blog_post_comment_path(post_comment.blog,post_comment),method: :delete,data:{confirm:"本当に削除しますか？"},remote: true %>
+          <% end %>
+      </td>
+    </tr>
+    <% end %>
+   </table>

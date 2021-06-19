@@ -7,9 +7,7 @@ class PostCommentsController < ApplicationController
     if comment.save
        redirect_back(fallback_location: root_path)
     else
-       @blog = Blog.find(params[:blog_id])
-       @post_comment = PostComment.new
-       render 'blogs/show'
+       render ''
     end
   end
 
