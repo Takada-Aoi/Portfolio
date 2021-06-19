@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_15_084951) do
+ActiveRecord::Schema.define(version: 2021_06_19_120951) do
 
   create_table "blogs", force: :cascade do |t|
     t.integer "user_id"
@@ -46,6 +46,20 @@ ActiveRecord::Schema.define(version: 2021_06_15_084951) do
   create_table "relationships", force: :cascade do |t|
     t.integer "following_id"
     t.integer "follower_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tag_relationships", force: :cascade do |t|
+    t.integer "blog_id"
+    t.integer "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blog_id", "tag_id"], name: "index_tag_relationships_on_blog_id_and_tag_id", unique: true
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

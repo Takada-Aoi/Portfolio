@@ -8,6 +8,9 @@
 <%= f.text_area:body %>
 <h4>カテゴリー</h4>
 <%= f.collection_select :category_id, Category.all, :id, :category_name, class: "form-control category_id" %>
+<h4>タグ付け</h4>
+<%= f.text_field :tag_ids,value: @tag_list, placeholder: "タグをつける。複数つけるには','で区切ってください。" %>
+
 <% if current_user == @blog.user %>
  <%= f.submit'更新する' %>
  <% end %>

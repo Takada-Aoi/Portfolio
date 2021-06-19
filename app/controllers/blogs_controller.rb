@@ -9,10 +9,13 @@ class BlogsController < ApplicationController
     def create
         @blog = Blog.new(blog_params)
         @blog.user_id = current_user.id
+        tag_list = params[:blog][:tag_ids].split(',')
         if @blog.save
-         redirect_to blogs_path
+           @blog.save_tags(tag_list)
+           flash[:success] = '投稿しました!'
+           redirect_to blogs_path
         else
-         render :new
+           render :new
         end
     end
 
@@ -27,6 +30,7 @@ class BlogsController < ApplicationController
 
     def edit
         @blog = Blog.find(params[:id])
+        @tag_list =@blog.tags.pluck(:name).join(",")
         unless @blog.user == current_user
             redirect_to blog_path(@blog.id)
         end
@@ -34,8 +38,11 @@ class BlogsController < ApplicationController
 
     def update
         @blog = Blog.find(params[:id])
+        tag_list = params[:blog][:tag_ids].split(',')
         if @blog.update(blog_params)
-         redirect_to blog_path(@blog.id)
+           @blog.save_tags(tag_list)
+           flash[:success] = '投稿を編集しました‼'
+           redirect_to blog_path(@blog.id)
         else
          render :edit
         end

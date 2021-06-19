@@ -8,6 +8,8 @@
 <%= f.text_area:body %>
 <h4>カテゴリー</h4>
 <%= f.collection_select :category_id, Category.all, :id, :category_name %>
+<h4>タグ付け</h4>
+<%= f.text_field :tag_ids, placeholder: "タグをつける。複数つけるには','で区切ってください。" %>
  <%= f.submit'投稿する' %>
 <% end %>
 
