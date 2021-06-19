@@ -28,21 +28,9 @@
      <!--コメント数・いいね-->
     <tr>
         <td><%= link_to"#{blog.post_comments.count}コメント",blog_path(blog.id)%></td>
-     <% if user_signed_in? %>
-        <% if blog.favorited_by?(current_user) %>
-        <td>
-            <%= link_to blog_favorites_path(blog),method: :delete do %>
-            ♥<%= blog.favorites.count %> いいね
-            <% end %>
-        </td>
-        <% else %>
-         <td>
-            <%= link_to blog_favorites_path(blog),method: :post do %>
-            ♡<%= blog.favorites.count %> いいね
-            <% end %>
-        </td>
-        <% end %>
-     <% end %>
+    </tr>
+    <tr class = "favorite">
+        <%= render 'favorites/favorite',blog: blog %>
     </tr>
     <tr>
         <td>
