@@ -39,6 +39,14 @@
         </td>
     </tr>
     <tr>
+       <td>
+            <!--タグ-->
+            <% blog.tags.each do |tag| %>
+           タグ：  <%= tag.name %>
+            <% end %>
+        </td>
+    </tr>
+    <tr>
         <td>
             <%= attachment_image_tag blog, :image , :fill,100,100,format:'jpeg' %>
         </td>
