@@ -1,9 +1,9 @@
 <h1>投稿一覧</h1>
+<!--検索機能-->
 <div>
 <%= search_form_for(@q, url:search_blogs_path,local: true) do |f| %>
   <%= f.select :category_id_eq, options_from_collection_for_select(Category.all, :id, :category_name),{ include_blank: true } %>
   <%= f.label :tag, "タグ検索" %>
-  <%#= f.select :tags_id_cont, options_from_collection_for_select(Tag.all, :id, :name ) %>
   <%= f.search_field :tags_name_eq %>
   <%= f.submit "検索" %>
 <% end %>

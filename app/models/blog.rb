@@ -26,5 +26,10 @@ class Blog < ApplicationRecord
         self.tags << micropost_tag
         end
     end
-  
+
+        ransacker :favorites_count do
+        query = '(SELECT COUNT(favorites.blog_id) FROM favorites where favorites.blog_id = blogs.id GROUP BY favorites.blog_id)'
+        Arel.sql(query)
+        end
+
 end
