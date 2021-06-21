@@ -13,6 +13,10 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap";
+ @import 'font-awesome-sprockets';
+ @import 'font-awesome';
+ 
 .fixed_btn
 {
   position: fixed;
@@ -20,3 +24,6 @@
   right: 10px;
   padding: 6px 40px;
 }
+
+body {
+  background-image: image-url("backimage.jpg");}
