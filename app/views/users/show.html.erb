@@ -1,6 +1,10 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
 <%= render 'users/info',user: @user %>
-
-<table>
+    </div>
+<div class="col-md-8 offset-md-1">
+ <table>
     <tr>
         <th>投稿一覧</th>
     </tr>
@@ -38,6 +42,9 @@
         </td>
     </tr>
     <% end %>
+  <% end %>
 </table>
-<button class ="fixed_button" ><%= link_to "新規投稿",new_blog_path %></button>
-<% end %>
+<button class ="btn btn-outline-primary" ><%= link_to "新規投稿",new_blog_path %></button>
+  </div>
+ </div>
+</div>

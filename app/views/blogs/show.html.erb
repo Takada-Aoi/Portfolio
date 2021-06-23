@@ -1,61 +1,81 @@
-<%#= render 'blogs/error',blog: @post_comment %>
-<table>
-    <tr>
-        <td><%= @blog.user.nickname %></td>
-        <td><%= @blog.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %></td>
-    </tr>
-    <tr>
-        <td>
-            <%= @blog.title %>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            カテゴリー： <%= @blog.category.category_name %>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <%= @blog.body %>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <!--タグ-->
+ <div class="card-list-containar py-5">
+ <div class="card w-50 mx-auto mt-4 shadow-lg">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-2">
+             <%= attachment_image_tag @blog.user, :profile_image, fallback: "no_image_logo.jpg", class:"mt-3 card-img-top rounded-circle" %>
+             <%= attachment_image_tag @blog, :image, class:"card-img-top" %>
+        </div>
+        <div class="col-10">
+            <!--タイトル-->
+          <p class="card-title">
+            <%= link_to(blog_path(@blog.id), class:"text-success") do %>
+              <strong><i class="far fa-flag"></i><span> <%= @blog.title %> | </span></strong>
+              <% end %>
+              <span><%= @blog.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %></span>
+          </p>
+          <!--カテゴリー-->
+          <p class="card-subtitle">カテゴリー : <%= @blog.category.category_name %></p>
+          <!--タグ-->
+          <p class="card-subtitle">
             <% @blog.tags.each do |tag| %>
-             タグ<%= tag.name %>
+           タグ：  <%= tag.name %>
             <% end %>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <%= attachment_image_tag @blog, :image , :fill,100,100,format:'jpeg' %>
-        </td>
-    </tr>
-    <tr class = "favorite">
-        <!--いいね-->
-    <%= render 'favorites/favorite',blog: @blog %>
-    </tr>
+        　</p>
+          <p class="card-text">ブログ : <%= @blog.body %></p>
+          <span><i class="fas fa-user"></i> By <%= link_to user_path(@blog.user.id),class:"text-dark" do %><%= @blog.user.nickname %><% end %> ｜ </span>
+          <span><%= link_to"#{@blog.post_comments.count}コメント",blog_path(@blog.id), class:"text-dark" %> | </span>
+          <span class = "favorite" ><%= render 'favorites/favorite',blog: @blog %></span>
+          <span><i class="fas fa-user"></i>
+          <!--フォロー-->
+        <% if user_signed_in? %>
+         <% if current_user != @blog.user %>
+          <% if @blog.user.followed_by?(current_user) %>
+           <%= link_to "フォロー済み", user_relationships_path(@blog.user.id), method: :delete,class:"text-dark" %>
+          <% else %>
+           <%= link_to "フォローする", user_relationships_path(@blog.user.id),method: :post,class:"text-dark" %>
+          <% end %>
+         <% end %>
+        <% end %>
+          </span><br >
+          <span>
+              <% if current_user == @blog.user %>
+              <%= link_to "編集", edit_blog_path(@blog.id),class:"btn btn-primary" %>
+              <%= link_to "削除", blog_path(@blog.id),method: :delete,data:{confirm:"本当に削除しますか？"},class:"btn btn-danger" %>
+              <% end %>
+              <%= link_to "戻る", :back ,class:"btn btn-outline-primary" %>
+          </span>
+        </div>
+      </div>
+     </div>
+    </div>
+  </div>
 
-</table>
-<% if current_user == @blog.user %>
-<%= link_to "編集", edit_blog_path(@blog.id) %>
-<%= link_to "削除", blog_path(@blog.id),method: :delete,data:{confirm:"本当に削除しますか？"} %>
-<% end %>
-<%= link_to "一覧", blogs_path %>
-<!--コメント一覧-->
-<div class = "comments-count">
-    <p>コメント数:<%= @blog.post_comments.count%></p>
-</div>
-<div class = "blog_comments">
-   <%= render 'post_comments/comment', blog: @blog %>
-</div>
+<div class="card-list-containar py-5">
+ <div class="card w-50 mx-auto mt-4 shadow-lg">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+       <!--コメント一覧-->
+       <p>コメント数:<%= @blog.post_comments.count%></p>
+        <%= render 'post_comments/comment', blog: @blog %>
+        </div>
+      </div>
+     </div>
+  </div>
+ </div>
 <!--コメント投稿-->
-<div>
+<div class="containar">
+  <div class="row">
+   <div class="col-md-6 offset-md-3">
+    <% if user_signed_in? %>
     <% if current_user.followed_by?(@blog.user) && @blog.user.followed_by?(current_user) %>
      <%= form_with(model:[@blog,@post_comment]) do |f| %>
       <%= f.text_area :comment, rows:'5',placeholder:"コメント欄" %>
       <%= f.submit "送信する" %>
      <% end %>
     <% end %>
+   <% end %>
+   </div>
+  </div>
 </div>
