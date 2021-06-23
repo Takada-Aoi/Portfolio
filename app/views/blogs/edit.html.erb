@@ -1,19 +1,23 @@
-<h1>ブログ編集</h1>
-<%= form_with model:@blog,local:true do |f| %>
-<h4>画像</h4>
-<%= f.attachment_field:image %>
-<h4>タイトル</h4>
-<%= f.text_field:title %>
-<h4>本文</h4>
-<%= f.text_area:body %>
-<h4>カテゴリー</h4>
-<%= f.collection_select :category_id, Category.all, :id, :category_name, class: "form-control category_id" %>
-<h4>タグ付け</h4>
-<%= f.text_field :tag_ids,value: @tag_list, placeholder: "タグをつける。複数つけるには','で区切ってください。" %>
-
-<% if current_user == @blog.user %>
- <%= f.submit'更新する' %>
- <% end %>
-<% end %>
-
-<button class ="fixed_button" ><%= link_to "戻る", :back %></button>
+<div class="containar">
+  <div class="row no-gutters">
+    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
+      <h5 class="text-dark bg-light p-4 mb-0 text-center">ブログ編集フォーム</h5>
+      <div class="form-body p-4">
+       <%= render 'error',blog: @blog %>
+       <%= form_with model: @blog,local:true do |f| %>
+       <h4>カテゴリー</h4><%= f.collection_select :category_id, Category.all, :id, :category_name, class:"form-control" %>
+　　   <h4>画像</h4><%= f.attachment_field:image,class: "w-100" %>
+　　   <h4>タグ付け</h4><%= f.text_field :tag_ids,value: @tag_list, class:"form-control", placeholder: "タグをつける。複数つけるには','で区切ってください。" %>
+　 　  <h4>タイトル</h4><%= f.text_field:title, class:"form-control" %>
+       <h4>本文</h4>
+       <%= f.text_area:body,rows:"3",  class:"form-control" %>
+       <hr>
+       <% if current_user == @blog.user %>
+        <%= f.submit'更新する', class:"btn btn-lg btn-block btn-info mt-4" %>
+        <% end %>
+       <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<button class ="fixed_btn btn btn-outline-primary" ><%= link_to "戻る", :back %></button>

@@ -1,63 +1,10 @@
-<table>
-     <tr>
-        <th>
-            <%= sort_link(@q, :created_at,"投稿日時") %>
-        </th>
-         <th>
-            <%= sort_link(@q, :favorites_count,"いいね") %>
-        </th>
-    </tr>
-    <% @results.each do |blog| %>
-    <tr>
-        <td><%= blog.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %></td>
-        <td><%= blog.user.nickname %></td>
-        <td>
-        <!--フォロー-->
-        <% if user_signed_in? %>
-         <% if current_user != blog.user %>
-          <% if blog.user.followed_by?(current_user) %>
-           <%= link_to "フォロー済み", user_relationships_path(blog.user.id), method: :delete %><br>
-          <% else %>
-           <%= link_to "フォローする", user_relationships_path(blog.user.id),method: :post %>
-          <% end %>
-         <% end %>
-        <% end %>
-        </td>
-    </tr>
-     <!--コメント数・いいね-->
-    <tr>
-        <td><%= link_to"#{blog.post_comments.count}コメント",blog_path(blog.id)%></td>
-    </tr>
-    <tr class = "favorite">
-      <%= render 'favorites/favorite',blog: blog %>
-    </tr>
-    <tr>
-        <td>
-            <%= link_to blog_path(blog.id) do %>
-            <%= blog.title %>
-            <% end %>
-        </td>
-    </tr>
-    <tr>
-      　<td>
-            <%= blog.category.category_name %>
-        </td>
-        <td>
-            <%= blog.body %>
-        </td>
-    </tr>
-    <tr>
-       <td>
-            <!--タグ-->
-            <% blog.tags.each do |tag| %>
-           タグ：  <%= tag.name %>
-            <% end %>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <%= attachment_image_tag blog, :image , :fill,100,100,format:'jpeg' %>
-        </td>
-    </tr>
-    <% end %>
-</table>
+<div class ="containar">
+ <div class ="w-50 mx-auto mt-4">
+   <button type="button" class="btn btn-outline-primary"><%= sort_link(@q, :created_at,"投稿日時") %></button>
+   <button type="button" class="btn btn-outline-success"><%= sort_link(@q, :favorites_count,"いいね") %></button>
+ </div>
+</div>
+
+<div class="card-list-containar py-5">
+ <%= render 'index',blogs: @results %>
+</div>

@@ -1,61 +1,21 @@
-<h1>投稿一覧</h1>
-<!--検索機能-->
 <div class = "containar">
-<%= search_form_for(@q, url:search_blogs_path,local: true) do |f| %>
-  <%= f.select :category_id_eq, options_from_collection_for_select(Category.all, :id, :category_name),{ include_blank: true } %>
-  <%= f.label :tag, "タグ検索" %>
-  <%= f.search_field :tags_name_eq %>
-  <%= f.submit "検索" %>
-<% end %>
+ <div class ="w-50 mx-auto mt-4">
+     <h1>投稿一覧</h1>
+  <div class ="form-group">
+      <!--検索機能-->
+   <%= search_form_for(@q, url:search_blogs_path,local: true) do |f| %>
+    <%= f.select :category_id_eq, options_from_collection_for_select(Category.all, :id, :category_name),{ include_blank: true } %>
+    <%= f.label :tag, "タグ検索" %>
+    <%= f.search_field :tags_name_eq %>
+    <%= f.submit "検索" %>
+   <% end %>
+  </div>
+ </div>
 </div>
 
 
 <div class="card-list-containar py-5">
- <% @blogs.each do |blog| %>
-   <div class="card w-50 mx-auto mt-4 shadow-lg">
-       <%= attachment_image_tag blog, :image , :fill,100,100,format:'jpeg' %>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-2">
-            <%= attachment_image_tag blog.user, :profile_image, :fill, 10, 10, fallback: "no_image_logo.jpg", class:"mt-1 rounded-circle"; %>
-        </div>
-        <div class="col-10">
-            <!--タイトル-->
-          <p class="card-title">
-            <%= link_to(blog_path(blog.id), class:"text-success") do %>
-              <strong><i class="far fa-flag"></i><span> <%= blog.title %> | </span></strong>
-              <% end %>
-              <span><%= blog.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %></span>
-          </p>
-          <!--カテゴリー-->
-          <p class="card-subtitle">カテゴリー : <%= blog.category.category_name %></p>
-          <!--タグ-->
-          <p class="card-subtitle">
-            <% blog.tags.each do |tag| %>
-           タグ：  <%= tag.name %>
-            <% end %>
-        　</p>
-          <p class="card-text">ブログ : <%= blog.body %></p>
-          <span><i class="fas fa-user"></i> By <%= link_to user_path(blog.user.id),class:"text-dark" do %><%= blog.user.nickname %><% end %> ｜ </span>
-          <span><%= link_to"#{blog.post_comments.count}コメント",blog_path(blog.id), class:"text-dark" %> | </span>
-          <span class = "favorite" ><%= render 'favorites/favorite',blog: blog %></span>
-          <span><i class="fas fa-user"></i>
-          <!--フォロー-->
-        <% if user_signed_in? %>
-         <% if current_user != blog.user %>
-          <% if blog.user.followed_by?(current_user) %>
-           <%= link_to "フォロー済み", user_relationships_path(blog.user.id), method: :delete,class:"text-dark" %><br>
-          <% else %>
-           <%= link_to "フォローする", user_relationships_path(blog.user.id),method: :post,class:"text-dark" %>
-          <% end %>
-         <% end %>
-        <% end %>
-          </span>
-        </div>
-      </div>
-     </div>
-    </div>
-    <% end %>
+ <%= render 'index',blogs: @blogs %>
   </div>
 
 <button class ="fixed_btn btn btn-outline-primary" ><%= link_to "新規投稿",new_blog_path %></button>

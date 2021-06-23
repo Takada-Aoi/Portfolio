@@ -32,4 +32,7 @@ class Blog < ApplicationRecord
         Arel.sql(query)
         end
 
+    validates :title, presence: true,length: { in: 5..20 }
+    validates :body, presence: true,length: { in: 5..500 }
+
 end
