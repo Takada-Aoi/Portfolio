@@ -1,10 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-<%= render 'users/info',user: @user %>
+        <%= render 'users/info',user: @user %>
     </div>
-<div class="col-md-8 offset-md-1">
- <table>
+    
+<div class="col-md-4 offset-md-1">
+ <table class="table">
     <tr>
         <th>投稿一覧</th>
     </tr>
@@ -21,9 +22,11 @@
     </tr>
     <% end %>
 </table>
+</div>
 
+<div class="col-md-3">
 <% if current_user == @user %>
-<table>
+<table class="table">
     <tr>
         <th>いいねした投稿</th>
     </tr>
@@ -37,14 +40,11 @@
             <%= blog.title %>
             <% end %>
         </td>
-        <td>
-            <%= blog.body %>
-        </td>
+
     </tr>
     <% end %>
   <% end %>
 </table>
-<button class ="btn btn-outline-primary" ><%= link_to "新規投稿",new_blog_path %></button>
   </div>
  </div>
 </div>
