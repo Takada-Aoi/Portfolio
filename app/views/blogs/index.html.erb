@@ -17,5 +17,6 @@
 <div class="card-list-containar py-5">
  <%= render 'index',blogs: @blogs %>
   </div>
+  <%= paginate @blogs %>
 
 <button class ="fixed_btn btn btn-outline-primary" ><%= link_to "新規投稿",new_blog_path %></button>
