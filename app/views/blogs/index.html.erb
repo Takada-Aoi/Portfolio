@@ -1,8 +1,8 @@
 <div class = "containar">
  <div class ="w-50 mx-auto mt-4">
-     <h1>投稿一覧</h1>
   <div class ="form-group">
       <!--検索機能-->
+      <p>投稿検索</p>
    <%= search_form_for(@q, url:search_blogs_path,local: true) do |f| %>
     <%= f.select :category_id_eq, options_from_collection_for_select(Category.all, :id, :category_name),{ include_blank: true } %>
     <%= f.label :tag, "タグ検索" %>
@@ -13,8 +13,9 @@
  </div>
 </div>
 
-
+<!--投稿index-->
 <div class="card-list-containar py-5">
+ <h1 class="text-center">投稿一覧</h1>
  <%= render 'index',blogs: @blogs %>
   </div>
   <%= paginate @blogs %>
