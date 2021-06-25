@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'relationships/create'
   get 'relationships/destroy'
   get 'users/show'
+  put "/users/:id/hide" => "users#hide", as: 'users_hide'
   get "home/about" =>"homes#about"
   devise_for :users
   root to:'homes#top'

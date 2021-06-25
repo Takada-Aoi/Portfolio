@@ -24,6 +24,9 @@
         　</p>
           <p class="card-text">ブログ : <%= blog.body %></p>
           <span><i class="fas fa-user"></i> By <%= link_to user_path(blog.user.id),class:"text-dark" do %><%= blog.user.nickname %><% end %> ｜ </span>
+          <% if blog.user.active_for_authentication? == false %>
+          <span class="text-danger">※退会済みユーザーです※</span>
+          <% end %>
           <span><%= link_to"#{blog.post_comments.count}コメント",blog_path(blog.id), class:"text-dark" %> | </span>
           <span class = "favorite" ><%= render 'favorites/favorite',blog: blog %></span>
           <span><i class="fas fa-user"></i>

@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, {only: [:edit, :update, :destroy]}
+
   def show
     @user = User.find(params[:id])
     @blogs = @user.blogs
@@ -30,6 +32,15 @@ class UsersController < ApplicationController
   def followers
     user = User.find(params[:id])
     @users = user.followers
+  end
+
+  def hide
+        @user = User.find(params[:id])
+        @user.update(is_deleted: true)
+        #ログアウトさせる
+        reset_session
+        flash[:notice] = "ありがとうございました。また遊びに来てくださいね！"
+        redirect_to root_path
   end
 
   private
