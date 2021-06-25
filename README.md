@@ -49,7 +49,10 @@
 興味のあるジャンルの情報を探したい時  
 
 ## 設計書
-のちに追加
+
+ER図
+
+https://drive.google.com/file/d/17yvplMM6xDokZ5wW8CsmOfVbMkeqTv2s/view?usp=sharing
 
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/12NQLOEWEji_CsKzDi2Ru29oPXycbCvRM-nGVAoGTigE/edit?usp=sharing
@@ -62,4 +65,8 @@ https://docs.google.com/spreadsheets/d/12NQLOEWEji_CsKzDi2Ru29oPXycbCvRM-nGVAoGT
 - IDE：Cloud9
 
 ## 使用素材
-- のちに追加
+- イラスト素材(フリー)
+
+https://www.ac-illust.com/
+
+https://www.irasutoya.com/
