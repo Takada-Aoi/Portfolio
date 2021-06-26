@@ -17,9 +17,9 @@
           <!--カテゴリー-->
           <p class="card-subtitle">カテゴリー : <%= blog.category.category_name %></p>
           <!--タグ-->
-          <p class="card-subtitle">
+          <p class="card-subtitle">タグ：
             <% blog.tags.each do |tag| %>
-           タグ：  <%= tag.name %>
+           <%= tag.name %>
             <% end %>
         　</p>
           <p class="card-text">ブログ : <%= blog.body %></p>
