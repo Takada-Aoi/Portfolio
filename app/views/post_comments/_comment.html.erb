@@ -1,14 +1,15 @@
 <% blog.post_comments.each do |post_comment| %>
-<div><%= post_comment.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %></div>
-   <div>
-     <span><i class="fas fa-user"></i> By <%= post_comment.user.nickname %> </span>
-     </div>
-   <div class="row">
-     <div class="col"><%= post_comment.comment %></div>
+<div>
+  <%= post_comment.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %>
   <% if post_comment.user == current_user %>
-   <div class="col">
-     <%= link_to "削除",blog_post_comment_path(post_comment.blog,post_comment),method: :delete,data:{confirm:"本当に削除しますか？"},remote: true,class:"btn btn-danger" %>
+   <%= link_to "削除",blog_post_comment_path(post_comment.blog,post_comment),method: :delete,data:{confirm:"本当に削除しますか？"},remote: true,class:"btn btn-danger" %>
+   <% end %>
+  <br >
+   <span><i class="fas fa-user"></i> By <%= post_comment.user.nickname %> </span><br >
+   <div class="row">
+     <div class="col">
+       <%= post_comment.comment %>
+     </div>
    </div>
-   </div>
-     <% end %>
+</div>
 <% end %>
