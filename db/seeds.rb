@@ -21,6 +21,6 @@ Category.create!(
     },
     {
       category_name: 'イベント',
-    }
+    },
   ]
 )

@@ -17,6 +17,11 @@
  @import 'font-awesome-sprockets';
  @import 'font-awesome';
 
+#main {
+width: 100%; /* コンテンツの横幅を指定する */
+overflow: auto; /* コンテンツの表示を自動に設定（スクロール） */
+}
+
 .fixed_btn
 {
   position: fixed;
