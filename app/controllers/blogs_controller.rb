@@ -39,7 +39,8 @@ class BlogsController < ApplicationController
     def update
         @blog = Blog.find(params[:id])
         tag_list = params[:blog][:tag_ids].split(',')
-        if @blog.update(blog_params)
+        if current_user == @blog.user
+           @blog.update(blog_params)
            @blog.save_tags(tag_list)
            flash[:success] = '投稿を編集しました‼'
            redirect_to blog_path(@blog.id)
